@@ -1,3 +1,5 @@
+-;               --- START OF FILE index (1).html ---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -480,7 +482,7 @@
         এখানে আপনার পছন্দের অ্যাড নেটওয়ার্কের দেওয়া <script> ট্যাগটি বসাতে হবে।
         নিচের লাইনটি একটি উদাহরণ মাত্র। আপনি এটিকে পরিবর্তন করে আপনার নিজের কোড বসাবেন।
     -->
-    <script src='//libtl.com/sdk.js' data-zone='9702412' data-sdk='show_9702412'></script>
+    <script src='//libtl.com/sdk.js' data-zone='10043368' data-sdk='show_10043368'></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -579,72 +581,4 @@
                 item.addEventListener('click', () => showPage(item.getAttribute('data-page')));
             });
 
-            startEarningBtn.addEventListener('click', () => showPage('earn-page'));
-            withdrawBtn.addEventListener('click', () => showPage('withdraw-page'));
-            
-            watchAdBtn.addEventListener('click', () => {
-                if (parseInt(localStorage.getItem('adsWatched')) >= DAILY_ADS_LIMIT) {
-                    tg.showAlert('আপনার দৈনিক বিজ্ঞাপনের সীমা পৌঁছে গেছে।');
-                    return;
-                }
-
-                watchAdBtn.disabled = true;
-
-                // --- অ্যাড নেটওয়ার্কের কোড কল করার জায়গা (দ্বিতীয় অংশ) ---
-                // ======================================================================
-                // এখানে আপনার অ্যাড নেটওয়ার্কের দেওয়া ফাংশনটি কল করতে হবে।
-                // নিচের 'show_9702412()' লাইনটি একটি উদাহরণ।
-                // ======================================================================
-                if (typeof show_9702412 === 'function') {
-                    show_9702412().then(() => {
-                        let earnings = parseFloat(localStorage.getItem('earnings')) + AD_REWARD;
-                        let currentAdsWatched = parseInt(localStorage.getItem('adsWatched')) + 1;
-                        
-                        localStorage.setItem('earnings', earnings.toString());
-                        localStorage.setItem('adsWatched', currentAdsWatched.toString());
-                        
-                        tg.showAlert(`বিজ্ঞাপনটি দেখার জন্য আপনি BDT ${AD_REWARD.toFixed(2)} পেয়েছেন!`);
-                    }).catch(() => {
-                        tg.showAlert('বিজ্ঞাপনটি দেখাতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
-                    }).finally(() => {
-                        updateUI();
-                    });
-                } else {
-                    // Fallback for testing in browser without Telegram
-                    let earnings = parseFloat(localStorage.getItem('earnings')) + AD_REWARD;
-                    let currentAdsWatched = parseInt(localStorage.getItem('adsWatched')) + 1;
-                    localStorage.setItem('earnings', earnings.toString());
-                    localStorage.setItem('adsWatched', currentAdsWatched.toString());
-                    alert(`(Test Mode) You earned BDT ${AD_REWARD.toFixed(2)}!`);
-                    updateUI();
-                }
-            });
-
-            withdrawForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const amount = parseFloat(document.getElementById('withdraw-amount').value);
-                
-                tg.showConfirm(`আপনি কি আপনার উইথড্র অনুরোধ জমা দিতে চান?`, (confirmed) => {
-                    if (confirmed) {
-                        let newEarnings = parseFloat(localStorage.getItem('earnings')) - amount;
-                        localStorage.setItem('earnings', newEarnings.toString());
-                        
-                        tg.sendData(JSON.stringify({ 
-                            type: 'withdrawal', 
-                            amount: amount, 
-                            method: document.getElementById('withdraw-method').value,
-                            account: document.getElementById('account-number').value
-                        }));
-                        
-                        withdrawForm.reset();
-                        updateUI();
-                        tg.showAlert('আপনার উইথড্র অনুরোধ সফলভাবে জমা হয়েছে।');
-                    }
-                });
-            });
-
-            updateUI();
-        });
-    </script>
-</body>
-</html>
+            startEarningBtn.addEventListener('click', () => showPage('earn-page')      
